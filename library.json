@@ -1,0 +1,28 @@
+{
+    "name": "iizi_wifi_mng",
+    "version": "1.0.0",
+    "description": "easy wifi manager",
+    "keywords": "wifi manager, device configuration, app parameters",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/slaesh/iizi_wifi_mng.git"
+    },
+    "authors": [
+        {
+            "name": "slaesh",
+            "email": "noreply@slae.sh",
+            "url": "https://slae.sh",
+            "maintainer": true
+        }
+    ],
+    "license": "MIT",
+    "homepage": "https://slae.sh",
+    "dependencies": {},
+    "frameworks": "*",
+    "platforms": "*",
+    "export": {
+        "exclude": [
+            ".vscode/*.*"
+        ]
+    }
+}

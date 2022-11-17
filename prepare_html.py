@@ -59,7 +59,7 @@ with open("./html/html.h.template", "r", encoding="utf8") as templateFile:
 
             template = template.replace(file_content_placeholder, f_content)
 
-    with open("./src/html.h",
+    with open("./src/webserver/html/html.h",
               "w",
               encoding="utf8"
               ) as html_header_file:

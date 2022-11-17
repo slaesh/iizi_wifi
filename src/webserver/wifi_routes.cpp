@@ -10,9 +10,6 @@
 #include "html.h"
 #include "webserver_config.h"
 
-extern unsigned long start_wifi_scan;
-extern bool should_start_a_scan;
-
 void GET_wifi_page(AsyncWebServerRequest *request) {
   String wifiHtml = WIFI_HTML;
 
@@ -22,7 +19,9 @@ void GET_wifi_page(AsyncWebServerRequest *request) {
 }
 
 void GET_wifi_scan_results_handler(AsyncWebServerRequest *request) {
-  const auto is_scanning = start_wifi_scan ? true : false;
+  // TODO: include
+  extern uint32_t iizi_wifi_scan_started;
+  const auto is_scanning = iizi_wifi_scan_started ? true : false;
   auto n_networks        = WiFi.scanComplete();
   if (n_networks < 0 || is_scanning) {
     n_networks = 0;
@@ -115,7 +114,9 @@ void wifi_routes_add(AsyncWebServer &webserver) {
 
   webserver.on(EAF_WM_WEBSERVER_PREFIX "/wifi-start-scan", HTTP_POST,
                [](AsyncWebServerRequest *request) {
-                 should_start_a_scan = true;
+                 // TODO: include..
+                 extern bool iizi_wifi_should_start_scan;
+                 iizi_wifi_should_start_scan = true;
                  request->send(200);
                });
 

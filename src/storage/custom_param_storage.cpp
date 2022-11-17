@@ -7,14 +7,14 @@
 #include "FS.h"
 
 #define FileFS   LittleFS
-#define CPS_FILE F("/__wm.cps")
+#define CPS_FILE F("/__iizi.cps")
 
-static t_cps_parameter *user_parameters = NULL;
+static t_iizi_app_parameter *user_parameters = NULL;
 static uint16_t n_custom_params         = 0;
 
 uint16_t cps_custom_parameter_count() { return n_custom_params; }
 
-void cps_init(t_cps_parameter *params, const uint16_t n_params,
+void cps_init(t_iizi_app_parameter *params, const uint16_t n_params,
               boolean read_config) {
   user_parameters = params;
   n_custom_params = n_params;
@@ -165,7 +165,7 @@ boolean cps_read() {
   return cps_read_from_array(custom_params_key_values);
 }
 
-const char *cps_get_param(const char *param_key) {
+const char *iizi_get_parameter_value(const char *param_key) {
   String key = param_key;
 
   for (uint16_t i = 0; i < n_custom_params; ++i) {

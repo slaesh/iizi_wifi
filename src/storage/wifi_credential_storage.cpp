@@ -10,7 +10,7 @@
 // #include "StreamUtils.h"
 
 #define FileFS   LittleFS
-#define WCS_FILE F("/__wm.creds")
+#define WCS_FILE F("/__iizi.wifi")
 
 static char ssids[MAX_WIFI_CREDENTIALS][MAX_WIFI_SSID_LEN + 1];
 static char passswords[MAX_WIFI_CREDENTIALS][MAX_WIFI_PASS_LEN + 1];
