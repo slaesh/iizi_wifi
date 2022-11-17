@@ -10,7 +10,7 @@
 
 uint32_t iizi_wifi_scan_started = 0;
 
-void start_a_scan() {
+void iizi_wifi_start_a_scan() {
   iizi_wifi_scan_started = millis();
   if (iizi_wifi_scan_started == 0) ++iizi_wifi_scan_started;
 

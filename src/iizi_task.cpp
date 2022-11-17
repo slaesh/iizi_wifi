@@ -16,7 +16,7 @@ static void handle_portal_close_request() {
   iizi_portal_close();
 }
 
-static void handle_wifi_scan_start() {}
+static void handle_wifi_scan_start() { iizi_wifi_start_a_scan(); }
 
 static void iizi_task(void *_) {
   if (wcs_stored_credentials_count() == 0) {
