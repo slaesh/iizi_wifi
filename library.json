@@ -22,7 +22,10 @@
     "platforms": "*",
     "export": {
         "exclude": [
-            ".vscode/*.*"
+            ".vscode/**",
+            ".pio/**",
+            "html/**",
+            "platformio.ini"
         ]
     }
 }
