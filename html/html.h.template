@@ -1,0 +1,21 @@
+/* this file is generated, do not edit something in here! */
+
+// check this here!
+// https://randomnerdtutorials.com/esp32-vs-code-platformio-spiffs/
+
+#ifndef __HTML_H__
+#define __HTML_H__
+
+// maybe try this https://docs.platformio.org/en/latest/platforms/espressif32.html#embedding-binary-data
+
+const char HTTP_CONTENT_TYPE_HTML[] = "text/html";
+const char HTTP_CONTENT_TYPE_TEXT[] = "text/plain";
+const char HTTP_CONTENT_TYPE_JSON[] = "application/json";
+
+const char INDEX_HTML[] = "__index.html__";
+
+const char WIFI_HTML[] = "__wifi.html__";
+
+const char PARAMS_HTML[] = "__params.html__";
+
+#endif  // __HTML_H__

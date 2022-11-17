@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        background-color: #c3c3c3;
+        font-size: 40px;
+      }
+      p {
+        color: #ff7600;
+        font-weight: bolder;
+        font-size: 60px;
+      }
+      #scanned_ssids > li {
+        margin-bottom: 22px;
+      }
+      #scanned_ssids > li > .ssid {
+        cursor: pointer;
+        font-weight: bolder;
+      }
+      button {
+        width: 100%;
+        min-height: 80px;
+        font-size: 40px;
+        border-radius: 20px;
+      }
+      option,
+      select,
+      input {
+        min-height: 80px;
+        font-size: 40px;
+      }
+      .param-container {
+        display: flex;
+        margin-top: 22px;
+        align-items: center;
+        justify-content: space-between;
+      }
+    </style>
+  </head>
+  <body style="width: 80%; margin-left: 10%">
+    <p>parameters</p>
+    <div id="params">fetching params</div>
+    <button style="margin-bottom: 44px; margin-top: 22px" onclick="save()">
+      save
+    </button>
+    <script>
+      //let host = "";
+      let host = "http://192.168.178.129";
+      let configuredParams = [];
+      let fetching = true;
+
+      const paramsDiv = document.querySelector("#params");
+
+      const fetchParams = () => {
+        return fetch(host + "/params-query")
+          .then((response) => response.json())
+          .then((response) => {
+            console.log(response);
+            fetching = false;
+            return response;
+          })
+          .catch((e) => {
+            console.warn("err occured..", e);
+            return undefined;
+          });
+      };
+
+      // fetch params initially!
+      fetchParams().then((response) => {
+        console.log("fetchParams", response);
+        if (!response) return;
+
+        const { params, n_params } = response;
+        configuredParams = params;
+
+        updateParamInputs();
+      });
+
+      const valueChange = (idx, inputId) => {
+        const newValue = document.querySelector(`#${inputId}`)?.value;
+        if (newValue == null) return;
+
+        const param = configuredParams[idx];
+        if (param == null) return;
+
+        // replace value!
+        param[1] = newValue;
+        configuredParams[idx] = param;
+      };
+
+      const buildParamInputs = () => {
+        if (!configuredParams) return `nothing to do here.. :(`;
+
+        const buildInput = (idx, key, value, typeWithOptions, maxLength) => {
+          const paramId = `i_param_${idx}`;
+
+          let [type, ...options] = typeWithOptions.split("|");
+
+          console.log(type, options);
+
+          switch (type) {
+            case "int":
+              return `<input id="${paramId}" type="number" onchange="valueChange(${idx}, '${paramId}')" value="${value}" />`;
+
+            case "bool":
+              options = ["true", "false"];
+            /* fall through! */
+
+            case "enum":
+              console.log("options", options, value);
+
+              if (!options?.length) return `invalid enum type`;
+
+              return `<select id="${paramId}" onchange="valueChange(${idx}, '${paramId}')">${options.map(
+                (o) =>
+                  `<option ${
+                    o === value ? "selected" : ""
+                  } value="${o}">${o}</option>`
+              )}</select>`;
+          }
+
+          return `<input id="${paramId}" onchange="valueChange(${idx}, '${paramId}')" value="${value}" maxlength="${maxLength}" />`;
+        };
+
+        return configuredParams
+          .map(
+            (
+              [
+                param_key,
+                param_value,
+                param_type,
+                param_max_length,
+                param_label,
+                param_group,
+              ],
+              idx
+            ) => {
+              const label = param_label || param_group;
+              console.log("label", label);
+              return `<div class="param-container"><span style="min-width:10%">${label}</span>${buildInput(
+                idx,
+                param_key,
+                param_value,
+                param_type,
+                param_max_length
+              )}</div>`;
+            }
+          )
+          .join("");
+      };
+
+      const updateParamInputs = () => {
+        paramsDiv.innerHTML = buildParamInputs();
+      };
+
+      const save = () => {
+        if (fetching) return;
+
+        const prepareParams = () => {
+          return configuredParams.map(([key, val]) => {
+            // omit the rest.. just
+            return [key, val];
+          });
+        };
+        const params = prepareParams();
+
+        console.warn("SAVE !!", params);
+
+        return fetch(host + "/params-save", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            params,
+          }),
+        })
+          .then((response) => {
+            console.log(response);
+            document.location = "/";
+          })
+          .catch((e) => {
+            console.warn("err occured..", e);
+            return undefined;
+          });
+      };
+    </script>
+  </body>
+</html>
