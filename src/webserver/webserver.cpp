@@ -74,7 +74,7 @@ AsyncWebServer *webserver_init() {
     String wifi_info             = "not connected";
     const auto is_wifi_connected = WiFi.status() == WL_CONNECTED;
     if (is_wifi_connected) {
-      wifi_info = "connected to: " + WiFi.SSID();
+      wifi_info = "connected to <b>" + WiFi.SSID() + "</b>";
     }
 
     idxHtml.replace("{{wifi}}", wifi_info);
