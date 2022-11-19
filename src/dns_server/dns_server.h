@@ -1,10 +1,7 @@
 #ifndef __DNS_SERVER_H__
 #define __DNS_SERVER_H__
 
-#include "ESPAsyncDNSServer.h"
-
-extern AsyncDNSServer dnsServer;
-
-bool init_dns_server();
+bool dns_server_init();
+void dns_server_stop();
 
 #endif  // __DNS_SERVER_H__

@@ -1,11 +1,11 @@
 {
-    "name": "iizi_wifi_mng",
-    "version": "1.0.0",
+    "name": "iizi_wifi",
+    "version": "0.0.1",
     "description": "easy wifi manager",
     "keywords": "wifi manager, device configuration, app parameters",
     "repository": {
         "type": "git",
-        "url": "https://github.com/slaesh/iizi_wifi_mng.git"
+        "url": "https://github.com/slaesh/iizi_wifi.git"
     },
     "authors": [
         {
@@ -18,14 +18,18 @@
     "license": "MIT",
     "homepage": "https://slae.sh",
     "dependencies": {},
-    "frameworks": "*",
-    "platforms": "*",
+    "frameworks": [
+        "arduino"
+    ],
+    "platforms": [
+        "espressif32"
+    ],
     "export": {
         "exclude": [
             ".vscode/**",
-            ".pio/**",
             "html/**",
-            "platformio.ini"
+            "platformio.ini",
+            "prepare_html.py"
         ]
     }
 }

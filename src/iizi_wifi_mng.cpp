@@ -1,5 +1,7 @@
 #define __IIZI_WIFI_MNG_C__
 
+#include "iizi_wifi_mng.h"
+
 #include "ESPAsyncDNSServer.h"
 #include "ESPAsyncWebServer.h"
 #include "dns_server/dns_server.h"
@@ -11,18 +13,21 @@
 #include "webserver/webserver.h"
 #include "wifi/iizi_wifi.h"
 
-void iizi_wifi_mng_init(String hostname) {
+void iizi_wifi_mng_init(String hostname, bool start_webserver) {
   // set hostname, needs to be done BEFORE we init the WiFi itself!
   iizi_portal_set_hostname(hostname);
 
   WiFi.begin();
-
   WiFi.setSleep(false);
-  Serial.printf("WiFi.sleep is enabled? %d\n", WiFi.getSleep());
-  Serial.printf("WiFi.TxPower is? %d\n", WiFi.getTxPower());
 
   storage_init();
   wcs_init();
+
+  // set up our web server
+  auto webserver = webserver_init();
+  if (start_webserver) {
+    webserver.begin();
+  }
 
   iizi_create_task();
 }
@@ -38,4 +43,4 @@ void iizi_wifi_mng_open_portal(uint32_t timeout) {
   iizi_portal_should_open = true;
 }
 
-void iizi_wifi_mng_start_webserver() { webserver_start(); }
+AsyncWebServer iizi_wifi_mng_webserver_instance() { webserver_instance(); }

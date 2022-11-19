@@ -3,11 +3,12 @@
 
 #include "dns_server.h"
 
+#include "ESPAsyncDNSServer.h"
 #include "WiFi.h"
 
-AsyncDNSServer dnsServer;
+static AsyncDNSServer dnsServer;
 
-bool init_dns_server() {
+bool dns_server_init() {
   dnsServer.stop();
 
   dnsServer.setErrorReplyCode(AsyncDNSReplyCode::NoError);
@@ -21,3 +22,5 @@ bool init_dns_server() {
 
   return false;
 }
+
+void dns_server_stop() { dnsServer.stop(); }

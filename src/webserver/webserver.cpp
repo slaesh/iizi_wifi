@@ -55,7 +55,7 @@ boolean already_redirected(AsyncWebServerRequest *request) {
   return true;
 }
 
-void webserver_init() {
+AsyncWebServer webserver_init() {
   asyncWebserver.reset();
 
   DefaultHeaders::Instance().addHeader("access-control-allow-origin", "*");
@@ -98,6 +98,8 @@ void webserver_init() {
 
     request->send(200, HTTP_CONTENT_TYPE_TEXT, "404");
   });
+
+  return asyncWebserver;
 }
 
-void webserver_start() { asyncWebserver.begin(); }
+AsyncWebServer webserver_instance() { return asyncWebserver; }

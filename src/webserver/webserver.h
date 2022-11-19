@@ -1,7 +1,9 @@
 #ifndef __IIZI_WEBSERVER_H__
 #define __IIZI_WEBSERVER_H__
 
-void webserver_init();
-void webserver_start();
+#include "ESPAsyncWebServer.h"
+
+AsyncWebServer webserver_init();
+AsyncWebServer webserver_instance();
 
 #endif  // __IIZI_WEBSERVER_H__
