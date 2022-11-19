@@ -70,6 +70,14 @@ AsyncWebServer *webserver_init() {
 
     String idxHtml = INDEX_HTML;
     idxHtml.replace("{{hostname}}", iizi_portal_get_hostname());
+
+    String wifi_info             = "not connected";
+    const auto is_wifi_connected = WiFi.status() == WL_CONNECTED;
+    if (is_wifi_connected) {
+      wifi_info = "connected to: " + WiFi.SSID();
+    }
+
+    idxHtml.replace("{{wifi}}", wifi_info);
     idxHtml.replace("{{ip}}", WiFi.localIP().toString().c_str());
     idxHtml.replace("{{close_ap_btn_disabled}}",
                     WiFi.getMode() & WIFI_MODE_AP ? "" : "disabled");
