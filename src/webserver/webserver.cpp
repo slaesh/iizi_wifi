@@ -35,10 +35,10 @@ boolean already_redirected(AsyncWebServerRequest *request) {
 
   // TODO: include it from somewhere?
   extern char *iizi_portal_hostname;
-  String ourHostname = iizi_portal_hostname;
+  Serial.printf("ourHostname1 = '%s'\n", iizi_portal_hostname);
 
-  Serial.printf("ourHostname1 = %s\n", iizi_portal_hostname);
-  Serial.printf("ourHostname2 = %s\n", ourHostname.c_str());
+  String ourHostname = iizi_portal_hostname;
+  Serial.printf("ourHostname2 = '%s'\n", ourHostname.c_str());
 
   // our hostname? thats fine!
   if (request->host() == ourHostname) return false;
@@ -81,6 +81,7 @@ void webserver_init() {
 
     // TODO: include it from somewhere?
     extern bool iizi_portal_should_close;
+    iizi_portal_should_close = true;
   });
 
   asyncWebserver.on("/reset", HTTP_POST, [](AsyncWebServerRequest *request) {
