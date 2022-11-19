@@ -21,8 +21,11 @@ void iizi_portal_set_hostname(String hostname) {
   // copy desired hostname
   // strncpy(iizi_portal_hostname, hostname.c_str(),
   // sizeof(iizi_portal_hostname));
-  strncpy(iizi_portal_hostname, hostname.c_str(), 32);
-  iizi_portal_hostname[32] = 0;
+  strncpy(iizi_portal_hostname, hostname.c_str(), sizeof(iizi_portal_hostname));
+  iizi_portal_hostname[sizeof(iizi_portal_hostname)] = 0;
+
+  Serial.printf("copied hostname '%s', str len: %d\n", iizi_portal_hostname,
+                strlen(iizi_portal_hostname));
 
   WiFi.setHostname(iizi_portal_hostname);
 }
