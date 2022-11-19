@@ -37,6 +37,8 @@ boolean already_redirected(AsyncWebServerRequest *request) {
   extern char *iizi_portal_hostname;
   String ourHostname = iizi_portal_hostname;
 
+  Serial.printf("ourHostname = %s\n", ourHostname.c_str());
+
   // our hostname? thats fine!
   if (request->host() == ourHostname) return false;
   // our ip? thats fine too!
