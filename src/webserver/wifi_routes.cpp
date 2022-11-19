@@ -15,7 +15,7 @@ void GET_wifi_page(AsyncWebServerRequest *request) {
 
   // TODO: replace something.. otherwise, pass in the WIFI_HTML directly!!
 
-  request->send(200, HTTP_CONTENT_TYPE_HTML, wifiHtml.c_str());
+  request->send(200, HTTP_CONTENT_TYPE_HTML, wifiHtml);
 }
 
 void GET_wifi_scan_results_handler(AsyncWebServerRequest *request) {

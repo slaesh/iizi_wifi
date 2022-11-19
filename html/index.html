@@ -22,13 +22,17 @@
   </head>
   <body style="width: 80%; margin-left: 10%">
     <form method="GET">
+      <p>iizi wifi manager</p>
+      <span>hostname: {{hostname}}</span>
+      <span>ip: {{ip}}</span>
+      <br />
       <button formaction="/wifi">manage your wifi connection</button>
       <br />
       <button formaction="/params">edit application parameters</button>
     </form>
     <form method="POST">
       <br />
-      <button formaction="/close">close</button>
+      <button {{close_ap_btn_disabled}} formaction="/close">close AP</button>
       <br />
       <button formaction="/reset">reset</button>
     </form>

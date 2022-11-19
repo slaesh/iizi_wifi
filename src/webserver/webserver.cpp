@@ -55,7 +55,7 @@ boolean already_redirected(AsyncWebServerRequest *request) {
   return true;
 }
 
-AsyncWebServer &webserver_init() {
+AsyncWebServer *webserver_init() {
   asyncWebserver.reset();
 
   DefaultHeaders::Instance().addHeader("access-control-allow-origin", "*");
@@ -69,9 +69,12 @@ AsyncWebServer &webserver_init() {
     }
 
     String idxHtml = INDEX_HTML;
-    idxHtml.replace("{{test}}", "DU");
+    idxHtml.replace("{{hostname}}", "cool hostname");
+    idxHtml.replace("{{ip}}", WiFi.localIP().toString().c_str());
+    idxHtml.replace("{{close_ap_btn_disabled}}",
+                    WiFi.getMode() & WIFI_MODE_AP ? "disabled" : "");
 
-    request->send(200, HTTP_CONTENT_TYPE_HTML, idxHtml.c_str());
+    request->send(200, HTTP_CONTENT_TYPE_HTML, idxHtml);
   });
 
   asyncWebserver.on("/close", HTTP_POST, [](AsyncWebServerRequest *request) {
@@ -99,7 +102,7 @@ AsyncWebServer &webserver_init() {
     request->send(200, HTTP_CONTENT_TYPE_TEXT, "404");
   });
 
-  return asyncWebserver;
+  return &asyncWebserver;
 }
 
-AsyncWebServer &webserver_instance() { return asyncWebserver; }
+AsyncWebServer *webserver_instance() { return &asyncWebserver; }

@@ -15,7 +15,7 @@ void GET_params_page(AsyncWebServerRequest *request) {
 
   // TODO: replace something.. otherwise, pass in the PARAMS_HTML directly!!
 
-  request->send(200, HTTP_CONTENT_TYPE_HTML, paramsHtml.c_str());
+  request->send(200, HTTP_CONTENT_TYPE_HTML, paramsHtml);
 }
 
 void GET_params_query_handler(AsyncWebServerRequest *request) {

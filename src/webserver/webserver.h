@@ -3,7 +3,7 @@
 
 #include "ESPAsyncWebServer.h"
 
-AsyncWebServer &webserver_init();
-AsyncWebServer &webserver_instance();
+AsyncWebServer *webserver_init();
+AsyncWebServer *webserver_instance();
 
 #endif  // __IIZI_WEBSERVER_H__

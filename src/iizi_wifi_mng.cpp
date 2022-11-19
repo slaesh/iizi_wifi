@@ -26,7 +26,7 @@ void iizi_wifi_mng_init(String hostname, bool start_webserver) {
   // set up our web server
   auto webserver = webserver_init();
   if (start_webserver) {
-    webserver.begin();
+    webserver->begin();
   }
 
   iizi_create_task();
@@ -43,6 +43,6 @@ void iizi_wifi_mng_open_portal(uint32_t timeout) {
   iizi_portal_should_open = true;
 }
 
-AsyncWebServer &iizi_wifi_mng_webserver_instance() {
+AsyncWebServer *iizi_wifi_mng_webserver_instance() {
   return webserver_instance();
 }

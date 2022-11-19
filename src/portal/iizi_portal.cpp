@@ -38,8 +38,9 @@ void iizi_portal_open(uint32_t timeout) {
   // set up our dns server
   dns_server_init();
 
-  // start web server if not yet started..
-  webserver_instance().begin();
+  // TODO: trust that the webserver is running? or maybe start it again?
+  // --> check if we "just can start it again" without creating memory
+  // leaks?????
 }
 
 void iizi_portal_close() {
