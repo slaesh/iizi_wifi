@@ -72,7 +72,7 @@ AsyncWebServer *webserver_init() {
     idxHtml.replace("{{hostname}}", "cool hostname");
     idxHtml.replace("{{ip}}", WiFi.localIP().toString().c_str());
     idxHtml.replace("{{close_ap_btn_disabled}}",
-                    WiFi.getMode() & WIFI_MODE_AP ? "disabled" : "");
+                    WiFi.getMode() & WIFI_MODE_AP ? "" : "disabled");
 
     request->send(200, HTTP_CONTENT_TYPE_HTML, idxHtml);
   });
