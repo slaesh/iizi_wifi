@@ -208,13 +208,13 @@ String getStoredWiFiPass() {
 
 bool wcs_creds_already_stored(String ssid, String pass) {
   for (uint8_t c = 0; c < MAX_WIFI_CREDENTIALS; ++c) {
-    const auto creds = wifi_credentials[c];
+    const auto creds = wifi_credentials + c;
 
-    const String _ssid = creds.ssid;
+    const String _ssid = creds->ssid;
     if (_ssid != ssid) continue;
 
-    const String _pass = creds.pass;
-    if (_pass != pass) return true;
+    const String _pass = creds->pass;
+    if (_pass == pass) return true;
   }
 
   return false;
