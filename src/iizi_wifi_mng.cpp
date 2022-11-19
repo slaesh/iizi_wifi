@@ -8,6 +8,7 @@
 #include "storage/storage_init.h"
 #include "storage/wifi_credential_storage.h"
 #include "task/iizi_task.h"
+#include "webserver/webserver.h"
 #include "wifi/iizi_wifi.h"
 
 void iizi_wifi_mng_init(String hostname) {
@@ -36,3 +37,5 @@ void iizi_wifi_mng_open_portal(uint32_t timeout) {
   extern bool iizi_portal_should_open;
   iizi_portal_should_open = true;
 }
+
+void iizi_wifi_mng_start_webserver() { webserver_start(); }
