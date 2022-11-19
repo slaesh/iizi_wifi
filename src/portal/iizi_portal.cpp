@@ -1,10 +1,10 @@
 
 #include "WiFi.h"
 #include "dns_server/dns_server.h"
-#include "webserver/webserver.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "storage/wifi_credential_storage.h"
+#include "webserver/webserver.h"
 
 static String ap_name;
 
@@ -15,8 +15,14 @@ void iizi_portal_set_hostname(String hostname) {
     // TODO: set with MAC addr..
   }
 
+  Serial.printf("copy hostname '%s', max len: %d\n", hostname.c_str(),
+                sizeof(iizi_portal_hostname));
+
   // copy desired hostname
-  strncpy(iizi_portal_hostname, hostname.c_str(), sizeof(iizi_portal_hostname));
+  // strncpy(iizi_portal_hostname, hostname.c_str(),
+  // sizeof(iizi_portal_hostname));
+  strncpy(iizi_portal_hostname, hostname.c_str(), 32);
+  iizi_portal_hostname[32] = 0;
 
   WiFi.setHostname(iizi_portal_hostname);
 }
