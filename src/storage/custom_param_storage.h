@@ -3,13 +3,7 @@
 
 #include <ArduinoJson.h>
 
-typedef struct {
-  const char *key;
-  const char *label;
-  const char *value;
-  const char *type;
-  const uint16_t max_length;
-} t_iizi_app_parameter;
+#include "../iizi_app_parameters.h"
 
 uint16_t cps_custom_parameter_count();
 

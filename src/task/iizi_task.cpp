@@ -1,9 +1,9 @@
 
+#include "../portal/iizi_portal.h"
+#include "../storage/wifi_credential_storage.h"
+#include "../wifi/iizi_wifi.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-#include "iizi_portal.h"
-#include "iizi_wifi.h"
-#include "storage/wifi_credential_storage.h"
 
 bool iizi_portal_should_open     = false;
 bool iizi_portal_should_close    = false;

@@ -7,7 +7,7 @@
 
 #include "../storage/custom_param_storage.h"
 #include "AsyncJson.h"
-#include "html.h"
+#include "html/html.h"
 #include "webserver_config.h"
 
 void GET_params_page(AsyncWebServerRequest *request) {

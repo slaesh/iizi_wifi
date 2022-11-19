@@ -1,16 +1,14 @@
 #define __IIZI_WIFI_MNG_C__
 
-#include "iizi_wifi.h"
-
 #include "ESPAsyncDNSServer.h"
 #include "ESPAsyncWebServer.h"
 #include "dns_server/dns_server.h"
-#include "iizi_portal.h"
-#include "iizi_task.h"
+#include "wifi/iizi_wifi.h"
+#include "portal/iizi_portal.h"
 #include "storage/custom_param_storage.h"
 #include "storage/storage_init.h"
 #include "storage/wifi_credential_storage.h"
-
+#include "task/iizi_task.h"
 
 void iizi_wifi_mng_init(String hostname) {
   // set hostname, needs to be done BEFORE we init the WiFi itself!

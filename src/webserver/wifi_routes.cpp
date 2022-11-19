@@ -7,7 +7,7 @@
 
 #include "../storage/wifi_credential_storage.h"
 #include "AsyncJson.h"
-#include "html.h"
+#include "html/html.h"
 #include "webserver_config.h"
 
 void GET_wifi_page(AsyncWebServerRequest *request) {
