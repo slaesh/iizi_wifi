@@ -69,7 +69,7 @@ AsyncWebServer *webserver_init() {
     }
 
     String idxHtml = INDEX_HTML;
-    idxHtml.replace("{{hostname}}", "cool hostname");
+    idxHtml.replace("{{hostname}}", iizi_portal_get_hostname());
     idxHtml.replace("{{ip}}", WiFi.localIP().toString().c_str());
     idxHtml.replace("{{close_ap_btn_disabled}}",
                     WiFi.getMode() & WIFI_MODE_AP ? "" : "disabled");
