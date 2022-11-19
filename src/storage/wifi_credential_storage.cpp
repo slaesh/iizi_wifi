@@ -206,18 +206,58 @@ String getStoredWiFiPass() {
   return String(reinterpret_cast<char *>(conf.sta.password));
 }
 
+bool wcs_creds_already_stored(String ssid, String pass) {
+  for (uint8_t c = 0; c < MAX_WIFI_CREDENTIALS; ++c) {
+    const auto creds = wifi_credentials[c];
+
+    const String _ssid = creds.ssid;
+    if (_ssid != ssid) continue;
+
+    const String _pass = creds.pass;
+    if (_pass != pass) return true;
+  }
+
+  return false;
+}
+
+void wcs_add_credentials(String ssid, String pass) {
+  for (uint8_t c = 0; c < MAX_WIFI_CREDENTIALS; ++c) {
+    const auto creds = wifi_credentials + c;
+
+    // already something stored?
+    if (creds->ssid[0] != 0) continue;
+
+    char *cur_ssid = (char *)(creds->ssid);
+    str_n_copy_with_termination(cur_ssid, ssid.c_str(), MAX_WIFI_SSID_LEN + 1);
+
+    char *cur_pass = (char *)(creds->pass);
+    str_n_copy_with_termination(cur_pass, pass.c_str(), MAX_WIFI_PASS_LEN + 1);
+
+    // we did it, done here!
+    return;
+  }
+}
+
 void wcs_init() {
   wcs_read();
 
   const auto ssid = getStoredWiFiSSID();
   const auto pass = getStoredWiFiPass();
 
-  Serial.printf("stored.. %s :: %s\n", ssid.c_str(), pass.c_str());
+  Serial.printf("ESP stored.. %s :: %s\n", ssid.c_str(), pass.c_str());
 
   // TODO: do we want to check the stored against our "internal" ones?
 
   const auto n_creds_stored = wcs_stored_credentials_count();
   Serial.printf("wcs_init(): found %d stored credentials\n", n_creds_stored);
+
+  if (n_creds_stored >= MAX_WIFI_CREDENTIALS) return;
+  if (wcs_creds_already_stored(ssid, pass)) return;
+
+  Serial.println("wcs_init(): lets add the last known credentials!!");
+
+  wcs_add_credentials(ssid, pass);
+  wcs_save();
 }
 
 uint8_t wcs_stored_credentials_count() {
