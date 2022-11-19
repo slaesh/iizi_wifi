@@ -11,11 +11,7 @@
 #include "webserver_config.h"
 
 void GET_wifi_page(AsyncWebServerRequest *request) {
-  String wifiHtml = WIFI_HTML;
-
-  // TODO: replace something.. otherwise, pass in the WIFI_HTML directly!!
-
-  request->send(200, HTTP_CONTENT_TYPE_HTML, wifiHtml);
+  request->send_P(200, HTTP_CONTENT_TYPE_HTML, WIFI_HTML);
 }
 
 void GET_wifi_scan_results_handler(AsyncWebServerRequest *request) {

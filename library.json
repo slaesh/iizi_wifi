@@ -1,6 +1,6 @@
 {
     "name": "iizi_wifi",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "easy wifi manager",
     "keywords": "wifi manager, device configuration, app parameters",
     "repository": {
@@ -18,17 +18,12 @@
     "license": "MIT",
     "homepage": "https://slae.sh",
     "dependencies": {},
-    "frameworks": [
-        "arduino"
-    ],
-    "platforms": [
-        "espressif32"
-    ],
+    "frameworks": "*",
+    "platforms": "*",
     "export": {
         "exclude": [
             ".vscode/**",
             "html/**",
-            "platformio.ini",
             "prepare_html.py"
         ]
     }

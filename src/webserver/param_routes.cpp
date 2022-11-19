@@ -11,11 +11,7 @@
 #include "webserver_config.h"
 
 void GET_params_page(AsyncWebServerRequest *request) {
-  String paramsHtml = PARAMS_HTML;
-
-  // TODO: replace something.. otherwise, pass in the PARAMS_HTML directly!!
-
-  request->send(200, HTTP_CONTENT_TYPE_HTML, paramsHtml);
+    request->send_P(200, HTTP_CONTENT_TYPE_HTML, PARAMS_HTML);
 }
 
 void GET_params_query_handler(AsyncWebServerRequest *request) {
