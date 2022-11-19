@@ -30,7 +30,7 @@
     </style>
   </head>
   <body style="width: 80%; margin-left: 10%">
-    <p><span style="cursor: pointer" onclick="document.location = '/'">< </span>wifi</p>
+    <p><span style="cursor: pointer" onclick="goBack()">< </span>wifi</p>
     <button id="start_scan">start scan</button>
     <ul id="scanned_ssids"></ul>
     <button onclick="clickSSID('')">add manual entry</button>
@@ -75,6 +75,8 @@
 
         setScanning(false);
       });
+
+      const goBack = () => (document.location = "/");
 
       const setScanning = (val) => {
         startScanBtn.disabled = scanning = val === true;
@@ -246,10 +248,6 @@
             console.warn("err occured..", e);
             return undefined;
           });
-      };
-
-      const goBack = () => {
-        document.location = "/";
       };
 
       const fetchWifiCreds = () => {
