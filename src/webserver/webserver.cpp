@@ -1,4 +1,5 @@
 
+#include "../portal/iizi_portal.h"
 #include "ESPAsyncWebServer.h"
 #include "html/html.h"
 #include "param_routes.h"
@@ -33,12 +34,8 @@ String toStringIp(const IPAddress &ip) {
 boolean already_redirected(AsyncWebServerRequest *request) {
   Serial.printf("request host IP = %s\n", request->host().c_str());
 
-  // TODO: include it from somewhere?
-  extern char *iizi_portal_hostname;
-  Serial.printf("ourHostname1 = '%s'\n", iizi_portal_hostname);
-
-  String ourHostname = iizi_portal_hostname;
-  Serial.printf("ourHostname2 = '%s'\n", ourHostname.c_str());
+  const auto iizi_portal_hostname = iizi_portal_get_hostname();
+  String ourHostname              = iizi_portal_hostname;
 
   // our hostname? thats fine!
   if (request->host() == ourHostname) return false;
@@ -48,8 +45,9 @@ boolean already_redirected(AsyncWebServerRequest *request) {
     return false;
 
   // .. otherwise redirect!
-  String redirectRoute =
-      String("http://") + toStringIp(request->client()->localIP());
+  String apIp          = toStringIp(request->client()->localIP());
+  String redirectRoute = String("http://") + apIp;
+
   Serial.printf("redirecting to our root route! '%s'\n", redirectRoute.c_str());
 
   request->redirect(redirectRoute);

@@ -8,7 +8,7 @@
 
 static String ap_name;
 
-char iizi_portal_hostname[32 + 1] = "TODO_USE_MAC";
+static char iizi_portal_hostname[32 + 1] = "TODO_USE_MAC";
 
 void iizi_portal_set_hostname(String hostname) {
   if (hostname == "") {
@@ -28,6 +28,10 @@ void iizi_portal_set_hostname(String hostname) {
                 strlen(iizi_portal_hostname));
 
   WiFi.setHostname(iizi_portal_hostname);
+}
+
+const char *iizi_portal_get_hostname() {
+  return iizi_portal_hostname;
 }
 
 void iizi_portal_open(uint32_t timeout) {
