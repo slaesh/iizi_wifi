@@ -12,7 +12,7 @@ typedef struct {
 } t_iizi_app_parameter;
 
 void iizi_app_parameters(t_iizi_app_parameter *params, const uint16_t n_params,
-                         boolean read_config);
+                         bool read_config);
 const char *iizi_get_parameter_value(const char *param_key);
 
 #endif  // __IIZI_APP_PARAMETERS_H__
