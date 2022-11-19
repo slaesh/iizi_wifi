@@ -7,6 +7,6 @@
 
 void iizi_wifi_mng_init(String hostname, bool start_webserver = true);
 void iizi_wifi_mng_open_portal(uint32_t timeout = 0);
-AsyncWebServer iizi_wifi_mng_webserver_instance();
+AsyncWebServer &iizi_wifi_mng_webserver_instance();
 
 #endif  // __IIZI_WIFI_MNG_H__

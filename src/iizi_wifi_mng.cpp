@@ -43,4 +43,6 @@ void iizi_wifi_mng_open_portal(uint32_t timeout) {
   iizi_portal_should_open = true;
 }
 
-AsyncWebServer iizi_wifi_mng_webserver_instance() { webserver_instance(); }
+AsyncWebServer &iizi_wifi_mng_webserver_instance() {
+  return webserver_instance();
+}

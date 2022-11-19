@@ -55,7 +55,7 @@ boolean already_redirected(AsyncWebServerRequest *request) {
   return true;
 }
 
-AsyncWebServer webserver_init() {
+AsyncWebServer &webserver_init() {
   asyncWebserver.reset();
 
   DefaultHeaders::Instance().addHeader("access-control-allow-origin", "*");
@@ -102,4 +102,4 @@ AsyncWebServer webserver_init() {
   return asyncWebserver;
 }
 
-AsyncWebServer webserver_instance() { return asyncWebserver; }
+AsyncWebServer &webserver_instance() { return asyncWebserver; }
