@@ -7,7 +7,7 @@
 #include "webserver/webserver.h"
 
 static String ap_name;
-static char iizi_portal_hostname[32 + 1] = "TODO_USE_MAC";
+static char iizi_portal_hostname[32 + 1] = "";
 
 void iizi_portal_set_hostname(String hostname) {
   if (hostname == "") {
@@ -51,3 +51,7 @@ void iizi_portal_close() {
 
   WiFi.begin();  // just to be sure..
 }
+
+bool iizi_portal_is_open() { return WiFi.getMode() & WIFI_MODE_AP; }
+
+uint8_t iizi_portal_clients_connected() { return WiFi.softAPgetStationNum(); }
