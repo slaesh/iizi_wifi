@@ -67,6 +67,7 @@ static void iizi_task(void *_) {
     vTaskDelay(10 / portTICK_PERIOD_MS);
 
     iizi_wifi_loop();
+    check_portal_not_used();
 
     if (iizi_portal_should_close) {
       iizi_portal_should_close = false;
