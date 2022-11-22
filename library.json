@@ -1,6 +1,6 @@
 {
     "name": "iizi_wifi",
-    "version": "0.0.10",
+    "version": "0.0.11",
     "description": "easy wifi manager",
     "keywords": "wifi manager, device configuration, app parameters",
     "repository": {
@@ -20,6 +20,7 @@
     "dependencies": {
         "WiFi": "*",
         "LittleFS": "*",
+        "me-no-dev/AsyncTCP": "^1.1.1",
         "me-no-dev/ESP Async WebServer": "^1.2.3",
         "ESPAsyncDNSServer": "https://github.com/hunter-nl/ESPAsyncDNSServer",
         "bblanchon/ArduinoJson": "^6.19.4",
