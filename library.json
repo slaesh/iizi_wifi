@@ -1,6 +1,6 @@
 {
     "name": "iizi_wifi",
-    "version": "0.0.11",
+    "version": "0.0.12",
     "description": "easy wifi manager",
     "keywords": "wifi manager, device configuration, app parameters",
     "repository": {
@@ -30,7 +30,7 @@
         "arduino"
     ],
     "platforms": [
-        "espressif32"
+        "espressif"
     ],
     "headers": [
         "iizi_wifi_mng.h",
