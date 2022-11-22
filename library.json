@@ -1,6 +1,6 @@
 {
     "name": "iizi_wifi",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "description": "easy wifi manager",
     "keywords": "wifi manager, device configuration, app parameters",
     "repository": {
@@ -17,7 +17,16 @@
     ],
     "license": "MIT",
     "homepage": "https://slae.sh",
-    "dependencies": {},
+    "dependencies": {
+        "WiFi": "*",
+        "LittleFS": "*",
+        "FS": "*",
+        "me-no-dev/AsyncTCP": "*",
+        "me-no-dev/ESP Async WebServer": "*",
+        "ESPAsyncDNSServer": "https://github.com/hunter-nl/ESPAsyncDNSServer",
+        "bblanchon/ArduinoJson": "^6.19.4",
+        "slaesh/is_timer_expired": "*"
+    },
     "frameworks": [
         "arduino"
     ],
