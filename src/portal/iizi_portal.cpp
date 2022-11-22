@@ -25,9 +25,10 @@ void iizi_portal_set_hostname(String hostname) {
 
 const char *iizi_portal_get_hostname() { return iizi_portal_hostname; }
 
+bool iizi_portal_is_open() { return WiFi.getMode() & WIFI_MODE_AP; }
+
 void iizi_portal_open(uint32_t timeout) {
-  // AP already opened?
-  if (WiFi.getMode() & WIFI_MODE_AP) return;
+  if (iizi_portal_is_open()) return;
 
   ap_name = "iizi_";
   ap_name += iizi_portal_hostname;
@@ -38,20 +39,19 @@ void iizi_portal_open(uint32_t timeout) {
   // set up our dns server
   dns_server_init();
 
-  // TODO: trust that the webserver is running? or maybe start it again?
-  // --> check if we "just can start it again" without creating memory
-  // leaks?????
+  // start the webserver
+  const auto webserver = webserver_instance();
+  webserver->begin();
 }
 
 void iizi_portal_close() {
   dns_server_stop();
 
-  const auto cur_wifi_mode = WiFi.getMode();
-  WiFi.mode((wifi_mode_t)(cur_wifi_mode & ~WIFI_MODE_AP));  // close AP..
+  WiFi.enableAP(false);  // close AP..
 
-  WiFi.begin();  // just to be sure..
+  if (WiFi.getMode() & WIFI_MODE_STA) return;
+
+  WiFi.begin();
 }
-
-bool iizi_portal_is_open() { return WiFi.getMode() & WIFI_MODE_AP; }
 
 uint8_t iizi_portal_clients_connected() { return WiFi.softAPgetStationNum(); }
