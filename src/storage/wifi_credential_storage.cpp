@@ -126,8 +126,8 @@ boolean wcs_read_from_array(const JsonArray &wifi_creds) {
     if (creds_idx >= MAX_WIFI_CREDENTIALS) break;
     if (creds.isNull() || creds.size() != 2) continue;
 
-    const auto ssid = creds.getElement(0).as<String>();
-    const auto pass = creds.getElement(1).as<String>();
+    const auto ssid = creds[0].as<String>();
+    const auto pass = creds[1].as<String>();
 
     Serial.printf("wcs_read_from_array(): s(%s) :: p(%s)\n", ssid.c_str(),
                   pass.c_str());

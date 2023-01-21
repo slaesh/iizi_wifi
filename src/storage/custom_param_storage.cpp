@@ -10,7 +10,7 @@
 #define CPS_FILE F("/__iizi.cps")
 
 static t_iizi_app_parameter *user_parameters = NULL;
-static uint16_t n_custom_params         = 0;
+static uint16_t n_custom_params              = 0;
 
 uint16_t cps_custom_parameter_count() { return n_custom_params; }
 
@@ -112,8 +112,8 @@ boolean cps_read_from_array(const JsonArray &custom_params_key_values) {
   for (auto key_value : custom_params_key_values) {
     if (key_value.size() != 2) continue;
 
-    const auto key = key_value.getElement(0).as<String>();
-    const auto val = key_value.getElement(1).as<String>();
+    const auto key = key_value[0].as<String>();
+    const auto val = key_value[1].as<String>();
 
     Serial.printf("cps_read_from_array(): k(%s) :: v(%s)\n", key.c_str(),
                   val.c_str());
